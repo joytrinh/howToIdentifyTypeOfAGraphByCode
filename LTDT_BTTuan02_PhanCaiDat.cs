@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace LTDT_BTTuan02_PhanCaiDat
