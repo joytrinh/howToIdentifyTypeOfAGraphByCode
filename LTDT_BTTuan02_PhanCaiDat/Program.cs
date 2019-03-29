@@ -12,8 +12,8 @@ namespace LTDT_BTTuan02_PhanCaiDat
         static void Main(string[] args)
         {
             GRAPH g = new GRAPH();
-            string input_filename = @"D:\STUDY\IT\Semester3\GraphTheory\4_Projects\LTDT_BTTuan02_PhanCaiDat\input.txt";
-            //string input_filename = args[0];
+            //string input_filename = @"D:\STUDY\IT\Semester3\GraphTheory\4_Projects\LTDT_BTTuan02_PhanCaiDat\input.txt";
+            string input_filename = args[0];
             inputValue(input_filename, g);
             Console.ReadLine();
         }
@@ -99,16 +99,29 @@ namespace LTDT_BTTuan02_PhanCaiDat
                             }
                         }
 
+                        //Identify a regular graph
+                        for (int i = 1; i < degree.Length; i++)
+                        {
+                            if (degree[i] != degree[0])
+                            {
+                                regularGraph = false;
+                                break;
+                            }
+                        }
+
                         //Print
                         if (completeGraph)
                             Console.WriteLine("Day la do thi day du K" + g.numberOfVertexes);
                         else if (!completeGraph)
                             Console.WriteLine("Day khong phai la do thi day du");
+                        if (regularGraph)
+                            Console.WriteLine("Day la do thi " + degree[0] + "-chinh quy");
+                        else if (!regularGraph)
+                            Console.WriteLine("Day khong phai la do thi chinh quy");
                         if (cycle)
                             Console.WriteLine("Day la do thi vong C" + g.numberOfVertexes);
                         else if (!cycle)
                             Console.WriteLine("Day khong phai la do thi vong");
-                        
                     }
                     else
                         Console.WriteLine("The number of Vertexes must be greater than 2.");
