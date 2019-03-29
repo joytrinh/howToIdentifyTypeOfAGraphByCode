@@ -73,17 +73,42 @@ namespace LTDT_BTTuan02_PhanCaiDat
                             }
                         }
 
+                        //Identify degree of each vertex
+                        int[] degree = new int[g.numberOfVertexes];
+                        for (rowIndex = 0; rowIndex < g.numberOfVertexes; rowIndex++)
+                        {
+                            int count = 0;
+                            for (colIndex = 0; colIndex < g.numberOfVertexes; colIndex++)
+                                if (g.matrix[rowIndex, colIndex] != 0)
+                                {
+                                    if (rowIndex == colIndex)
+                                        count += g.matrix[rowIndex, colIndex] * 2;
+                                    else
+                                        count += g.matrix[rowIndex, colIndex];
+                                }
+                            degree[rowIndex] = count;
+                        }
+
+                        //Identify a cycle
+                        for (int i = 0; i < degree.Length; i++)
+                        {
+                            if (degree[i] != 2)
+                            {
+                                cycle = false;
+                                break;
+                            }
+                        }
+
                         //Print
                         if (completeGraph)
-                        {
                             Console.WriteLine("Day la do thi day du K" + g.numberOfVertexes);
-                            if (g.numberOfVertexes == 3)
-                                Console.WriteLine("Day la do thi vong C3");
-                            else if (g.numberOfVertexes > 3)
-                                Console.WriteLine("Day khong phai la do thi vong");
-                        }                            
                         else if (!completeGraph)
                             Console.WriteLine("Day khong phai la do thi day du");
+                        if (cycle)
+                            Console.WriteLine("Day la do thi vong C" + g.numberOfVertexes);
+                        else if (!cycle)
+                            Console.WriteLine("Day khong phai la do thi vong");
+                        
                     }
                     else
                         Console.WriteLine("The number of Vertexes must be greater than 2.");
